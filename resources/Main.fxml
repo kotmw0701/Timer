@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.input.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jp.motlof.timer.Controller">
+   <children>
+      <VBox fx:id="timerBox" layoutY="25.0" prefHeight="739.0" prefWidth="600.0" />
+      <CheckBox fx:id="adder" layoutX="227.0" layoutY="771.0" mnemonicParsing="false" text="加算型" />
+      <ComboBox fx:id="hour" editable="true" layoutX="313.0" layoutY="767.0" prefHeight="25.0" prefWidth="53.0" promptText="時" />
+      <ComboBox fx:id="minute" editable="true" layoutX="379.0" layoutY="767.0" prefHeight="25.0" prefWidth="53.0" promptText="分" />
+      <ComboBox fx:id="second" editable="true" layoutX="444.0" layoutY="767.0" prefHeight="25.0" prefWidth="53.0" promptText="秒" />
+      <Button layoutX="517.0" layoutY="767.0" mnemonicParsing="false" onAction="#onStart" text="開始/追加" />
+      <MenuBar prefHeight="25.0" prefWidth="600.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Settings">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </children>
+</Pane>

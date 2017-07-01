@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane prefHeight="100.0" prefWidth="600.0" style="-fx-border-style: solid;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jp.motlof.timer.TimerController">
+   <children>
+      <Label fx:id="number" layoutX="32.0" layoutY="10.0" text="1">
+         <font>
+            <Font name="Meiryo Bold" size="50.0" />
+         </font>
+      </Label>
+      <Label fx:id="timertext" alignment="CENTER" layoutX="100.0" layoutY="15.0" prefHeight="70.0" prefWidth="233.0" text="00:00:00.000" textAlignment="CENTER">
+         <font>
+            <Font name="Meiryo Bold" size="32.0" />
+         </font>
+      </Label>
+      <Button layoutX="376.0" layoutY="58.0" mnemonicParsing="false" onAction="#onStop" prefHeight="25.0" prefWidth="64.0" text="停止" />
+      <Button fx:id="pauseButton" layoutX="376.0" layoutY="14.0" mnemonicParsing="false" onAction="#onPause" text="一時停止" />
+      <Button fx:id="restartButton" disable="true" layoutX="499.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRestart" prefHeight="25.0" prefWidth="64.0" text="再起動" />
+      <Button layoutX="499.0" layoutY="58.0" mnemonicParsing="false" onAction="#onDelete" prefHeight="25.0" prefWidth="64.0" text="消去" />
+      <Separator layoutX="94.0" layoutY="3.0" orientation="VERTICAL" prefHeight="94.0" prefWidth="2.0" />
+      <Separator layoutX="336.0" layoutY="3.0" orientation="VERTICAL" prefHeight="94.0" prefWidth="2.0" />
+   </children>
+</Pane>

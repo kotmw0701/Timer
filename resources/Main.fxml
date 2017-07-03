@@ -10,20 +10,17 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jp.motlof.timer.Controller">
    <children>
-      <VBox fx:id="timerBox" layoutY="25.0" prefHeight="739.0" prefWidth="600.0" />
+      <Label fx:id="howto" layoutX="142.0" layoutY="303.0" prefHeight="194.0" prefWidth="343.0" text="How to use&#10;&#10;自分が使いたい時間を[時] [分] [秒]に入れる&#10;↓&#10;秒が増えていくようにしたい場合は[加算型]に✓を入れる&#10;↓&#10;[開始/追加]を押すとタイマーが開始&#10;&#10;複数作ることもできます。">
+         <font>
+            <Font name="Meiryo Bold" size="12.0" />
+         </font>
+      </Label>
       <CheckBox fx:id="adder" layoutX="227.0" layoutY="771.0" mnemonicParsing="false" text="加算型" />
       <ComboBox fx:id="hour" editable="true" layoutX="313.0" layoutY="767.0" prefHeight="25.0" prefWidth="53.0" promptText="時" />
       <ComboBox fx:id="minute" editable="true" layoutX="379.0" layoutY="767.0" prefHeight="25.0" prefWidth="53.0" promptText="分" />
       <ComboBox fx:id="second" editable="true" layoutX="444.0" layoutY="767.0" prefHeight="25.0" prefWidth="53.0" promptText="秒" />
       <Button layoutX="517.0" layoutY="767.0" mnemonicParsing="false" onAction="#onStart" text="開始/追加" />
-      <MenuBar prefHeight="25.0" prefWidth="600.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="Settings">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
+      <VBox fx:id="timerBox" prefHeight="764.0" prefWidth="600.0" />
+      <Button layoutX="406.0" layoutY="497.0" mnemonicParsing="false" onAction="#onHideButton" text="表示を消す" />
    </children>
 </Pane>

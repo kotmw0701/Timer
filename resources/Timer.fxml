@@ -24,5 +24,9 @@
       <Button layoutX="499.0" layoutY="58.0" mnemonicParsing="false" onAction="#onDelete" prefHeight="25.0" prefWidth="64.0" text="消去" />
       <Separator layoutX="94.0" layoutY="3.0" orientation="VERTICAL" prefHeight="94.0" prefWidth="2.0" />
       <Separator layoutX="336.0" layoutY="3.0" orientation="VERTICAL" prefHeight="94.0" prefWidth="2.0" />
+      <Button layoutX="578.0" layoutY="76.0" mnemonicParsing="false" onAction="#onOpenWindow" prefHeight="18.0" prefWidth="17.0" text="&gt;&gt;">
+         <font>
+            <Font size="6.0" />
+         </font></Button>
    </children>
 </Pane>

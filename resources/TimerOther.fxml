@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPress" onKeyReleased="#onKeyRelease" onMouseDragged="#onDragg" onMouseEntered="#onEnter" onMouseExited="#onExit" onMousePressed="#onPress" prefHeight="400.0" prefWidth="800.0" style="-fx-background-color: rgba(128,128,128,0.2);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jp.motlof.timer.OtherTimerController">
+   <children>
+      <Label fx:id="text" alignment="CENTER" layoutX="1.0" layoutY="110.0" prefHeight="162.0" prefWidth="800.0" style=": ;" text="00:00:00.000">
+         <font>
+            <Font name="Meiryo Bold" size="100.0" />
+         </font>
+      </Label>
+      <Label fx:id="title" alignment="CENTER" layoutX="1.0" layoutY="14.0" prefHeight="80.0" prefWidth="800.0" text="Timer num">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
+      <Separator layoutY="271.0" prefHeight="0.0" prefWidth="800.0" />
+      <Separator layoutY="109.0" prefHeight="3.0" prefWidth="800.0" />
+      <Button fx:id="closeButton" layoutX="687.0" layoutY="299.0" mnemonicParsing="false" onAction="#onClose" prefHeight="72.0" prefWidth="85.0" text="閉じる">
+         <font>
+            <Font name="Meiryo Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="stopButton" layoutX="135.0" layoutY="299.0" mnemonicParsing="false" onAction="#onStop" prefHeight="72.0" prefWidth="85.0" text="停止">
+         <font>
+            <Font name="Meiryo" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="startButton" disable="true" layoutX="24.0" layoutY="299.0" mnemonicParsing="false" onAction="#onStart" prefHeight="72.0" prefWidth="85.0" text="起動">
+         <font>
+            <Font name="Meiryo Bold" size="20.0" />
+         </font>
+      </Button>
+      <ToggleButton fx:id="pauseButton" layoutX="534.0" layoutY="299.0" mnemonicParsing="false" onAction="#onPause" prefHeight="72.0" prefWidth="126.0" text="一時停止">
+         <font>
+            <Font name="Meiryo" size="20.0" />
+         </font>
+      </ToggleButton>
+      <Slider fx:id="slider" layoutX="701.0" layoutY="7.0" onMouseDragged="#onSliderDrag" onMouseEntered="#onSliderEnter" onMouseExited="#onSliderExit" prefHeight="18.0" prefWidth="85.0" />
+      <Label fx:id="parcent" alignment="CENTER_RIGHT" layoutX="660.0" layoutY="7.0" prefHeight="18.0" prefWidth="38.0" text="0%" visible="false" />
+   </children>
+</Pane>

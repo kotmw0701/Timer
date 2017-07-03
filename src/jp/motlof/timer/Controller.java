@@ -10,23 +10,24 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 public class Controller implements Initializable {
 	
-	@FXML
-	public VBox timerBox;
+	@FXML VBox timerBox;
 	
-	@FXML
-	public ComboBox<Integer> hour, minute, second;
+	@FXML ComboBox<Integer> hour, minute, second;
 	
-	@FXML
-	public CheckBox adder;
+	@FXML CheckBox adder;
+	
+	@FXML Label howto;
 	
 	public static List<TimerController> timer = new ArrayList<>();
 
@@ -61,8 +62,13 @@ public class Controller implements Initializable {
 		timer.add(controller);
 	}
 	
+	@FXML
+	public void onHideButton(ActionEvent e) {
+		howto.setVisible(false);
+		((Node)e.getSource()).setVisible(false);
+	}
+	
 	private int getNum(ComboBox<Integer> box) {
-		//TODO Enter押された時の対処法 -> TextFieldからString固定で取得
 		String number = box.editorProperty().get().getText();
 		if(number == null || number.length() == 0)
 			return 0;
@@ -98,7 +104,7 @@ public class Controller implements Initializable {
 		try {
 			if(num != null && num.length() > 0)
 				Integer.parseInt(num);
-		} catch (NumberFormatException e) {//あんまり例外をつぶすやり方は好きじゃないが、子の判定方法の方が楽だから・・・
+		} catch (NumberFormatException e) {//あんまり例外をつぶすやり方は好きじゃないが、この判定方法の方が楽だから・・・
 			return false;
 		}
 		return true;

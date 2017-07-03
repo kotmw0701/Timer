@@ -4,24 +4,24 @@ import javafx.application.Platform;
 import javafx.scene.control.Label;
 
 public class Timer extends Thread{
-	
-	private int tick, maxtick;
-	private int delay = 1;
+
+	private long starttime;
+	private long pt_before;
+	private long tick = 1, maxtick;
+	private int period = 1;
 	private boolean add;
 	private Label text;
 	private boolean pause = false, running = true;
 	
 	public Timer(int hour, int minute, int second, boolean adder, Label text) {
 		this.maxtick = (second + (minute*60) + (hour*3600))*1000;
-		this.tick = (adder ? 0 : this.maxtick);
 		this.add = adder;
 		this.text = text;
 		updateTimer();
 	}
 	
-	private Timer(int tick, boolean adder, Label text) {
-		this.maxtick = tick;
-		this.tick = (adder ? 0 : tick);
+	private Timer(long maxtick2, boolean adder, Label text) {
+		this.maxtick = maxtick2;
 		this.add = adder;
 		this.text = text;
 		updateTimer();
@@ -29,50 +29,63 @@ public class Timer extends Thread{
 	
 	@Override
 	public void run() {
+		starttime = System.currentTimeMillis();
 		running = true;
 		while(running && ((add && tick <= maxtick) || (!add && tick > 0))) {
 			try {
-				if(pause) {
-					sleep(10);
-					continue;
-				}
-				if(add) tick++;
-				else tick--;
-				updateTimer();
-				sleep(delay);
+				sleep(period);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			if(pause) continue;
+			tick = System.currentTimeMillis() - starttime;
+			if(!add) tick = maxtick - tick;
+			updateTimer();
 		}
 	}
 	
 	private void updateTimer() {
-		int hour = (tick/3600000)%60;
-		int minute = (tick/60000)%60;
-		int second = ((tick/1000)%60)+(add ? 0 : (tick == 0 ? 0 : 1));
-		int millisecond = tick%1000;
+		if(tick < 0)
+			tick = 0;
+		long hour = (tick/3600000)%60;
+		long minute = (tick/60000)%60;
+		long second = ((tick/1000)%60);
+		long millisecond = tick%1000;
 		Platform.runLater(() -> {
 			text.setText(lengthCheck(hour, false)+":"+lengthCheck(minute, false)+":"+lengthCheck(second, false)+"."+lengthCheck(millisecond, true));
 		});
 	}
 	
-	private String lengthCheck(int i, boolean millisecond) {
-		if(!millisecond)
-			return (String.valueOf(i).length() < 2 ? "0"+i : String.valueOf(i));
+	private String lengthCheck(long i, boolean millisecond) {
+	if(millisecond)
 		return (String.valueOf(i).length() < 3 ? (String.valueOf(i).length() < 2 ? "00"+String.valueOf(i) : "0"+String.valueOf(i)) : String.valueOf(i));
+	return (String.valueOf(i).length() < 2 ? "0"+i : String.valueOf(i));
 	}
 	
-	public int getMaxTick() {
+	public void setLabel(Label label) {
+		this.text = label;
+		updateTimer();
+	}
+	
+	public long getMaxTick() {
 		return this.maxtick;
 	}
 	
 	public boolean togglePause() {
 		pause = !pause;
+		if(pause)//一時停止間の時間を計算して、開始時間を遅らせないと、一時停止の意味がなくなる
+			pt_before = System.currentTimeMillis();
+		else
+			starttime += (System.currentTimeMillis() - pt_before);
 		return pause;
 	}
 	
-	public boolean isPauce() {
+	public boolean isPause() {
 		return pause;
+	}
+	
+	public boolean isRunning() {
+		return running;
 	}
 	
 	public void cancel() {

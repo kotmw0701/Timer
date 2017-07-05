@@ -17,11 +17,10 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 
 public class Controller implements Initializable {
 	
-	@FXML VBox timerBox;
+	@FXML Pane timerBox;
 	
 	@FXML ComboBox<Integer> hour, minute, second;
 	
@@ -30,12 +29,14 @@ public class Controller implements Initializable {
 	@FXML Label howto;
 	
 	public static List<TimerController> timer = new ArrayList<>();
+	public static List<OtherTimerController> timer2 = new ArrayList<>();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		for(int i = 1; i <= 60; i++) {
 			minute.getItems().add(i);
 			second.getItems().add(i);
+			Main.debugLog(i);
 		}
 		for(int i = 1; i <= 24; i++) {
 			hour.getItems().add(i);
@@ -46,8 +47,10 @@ public class Controller implements Initializable {
 	public void onStart(ActionEvent e) {
 		if(!checkNum())
 			return;
+		Main.debugLog("NumberCheck... OK");
 		if(!checkLimit())
 			return;
+		Main.debugLog("LimitCheck... OK");
 		Pane newtimer = null;
 		FXMLLoader loader = new FXMLLoader(ClassLoader.getSystemResource("Timer.fxml"));
 		try {
@@ -55,9 +58,12 @@ public class Controller implements Initializable {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+		Main.debugLog("Timer Scene loaded");
+		newtimer.setLayoutY(100*timer.size());
 		timerBox.getChildren().add(newtimer);
 		TimerController controller = loader.getController();
 		controller.setnum(timer.size()+1);
+		Main.debugLog("Timer Number: " +(timer.size()+1));
 		controller.startTimer(getNum(second), getNum(minute), getNum(hour), adder.isSelected());
 		timer.add(controller);
 	}
@@ -66,6 +72,7 @@ public class Controller implements Initializable {
 	public void onHideButton(ActionEvent e) {
 		howto.setVisible(false);
 		((Node)e.getSource()).setVisible(false);
+		Main.debugLog("\"How to\" Hide");
 	}
 	
 	private int getNum(ComboBox<Integer> box) {
@@ -105,6 +112,7 @@ public class Controller implements Initializable {
 			if(num != null && num.length() > 0)
 				Integer.parseInt(num);
 		} catch (NumberFormatException e) {//あんまり例外をつぶすやり方は好きじゃないが、この判定方法の方が楽だから・・・
+			Main.debugLog(e);
 			return false;
 		}
 		return true;

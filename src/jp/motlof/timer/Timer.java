@@ -14,6 +14,8 @@ public class Timer extends Thread{
 	private boolean pause = false, running = true;
 	
 	public Timer(int hour, int minute, int second, boolean adder, Label text) {
+		Main.debugLog("new timer");
+		Main.debugLog(this);
 		this.maxtick = (second + (minute*60) + (hour*3600))*1000;
 		this.add = adder;
 		this.text = text;
@@ -30,6 +32,7 @@ public class Timer extends Thread{
 	@Override
 	public void run() {
 		starttime = System.currentTimeMillis();
+		Main.debugLog("Run "+starttime);
 		running = true;
 		while(running && ((add && tick <= maxtick) || (!add && tick > 0))) {
 			try {
@@ -94,6 +97,19 @@ public class Timer extends Thread{
 	}
 	
 	public Timer restart() {
+		Main.debugLog("Create restart Instance");
 		return new Timer(this.maxtick, add, text);
+	}
+	
+	@Override
+	public String toString() {
+		return "Timer [Start="+starttime+
+				" Tick="+tick+
+				" Period="+period+
+				" Adder="+add+
+				" MaxTick="+maxtick+
+				" Running="+running+
+				" Pause="+pause+
+				" PauseTime="+pt_before+"]";
 	}
 }

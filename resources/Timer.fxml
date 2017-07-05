@@ -6,24 +6,24 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane prefHeight="100.0" prefWidth="600.0" style="-fx-border-style: solid;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jp.motlof.timer.TimerController">
+<Pane onMouseDragged="#onDragg" onMousePressed="#onPress" prefHeight="100.0" prefWidth="600.0" style="-fx-border-style: solid; -fx-background-color: rgba(255,255,255,0.1);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jp.motlof.timer.TimerController">
    <children>
-      <Label fx:id="number" layoutX="32.0" layoutY="10.0" text="1">
+      <Label fx:id="number" layoutX="32.0" layoutY="10.0" text="1" textFill="#b5b5b5">
          <font>
             <Font name="Meiryo Bold" size="50.0" />
          </font>
       </Label>
-      <Label fx:id="timertext" alignment="CENTER" layoutX="100.0" layoutY="15.0" prefHeight="70.0" prefWidth="233.0" text="00:00:00.000" textAlignment="CENTER">
+      <Label fx:id="timertext" alignment="CENTER" layoutX="107.0" layoutY="15.0" prefHeight="70.0" prefWidth="261.0" text="00:00:00.000" textAlignment="CENTER" textFill="#b9b9b9">
          <font>
-            <Font name="Meiryo Bold" size="32.0" />
+            <Font name="Meiryo Bold" size="36.0" />
          </font>
       </Label>
-      <Button layoutX="376.0" layoutY="58.0" mnemonicParsing="false" onAction="#onStop" prefHeight="25.0" prefWidth="64.0" text="停止" />
-      <Button fx:id="pauseButton" layoutX="376.0" layoutY="14.0" mnemonicParsing="false" onAction="#onPause" text="一時停止" />
+      <Button layoutX="412.0" layoutY="58.0" mnemonicParsing="false" onAction="#onStop" prefHeight="25.0" prefWidth="64.0" text="停止" />
+      <Button fx:id="pauseButton" layoutX="412.0" layoutY="14.0" mnemonicParsing="false" onAction="#onPause" prefHeight="25.0" prefWidth="64.0" text="一時停止" />
       <Button fx:id="restartButton" disable="true" layoutX="499.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRestart" prefHeight="25.0" prefWidth="64.0" text="再起動" />
       <Button layoutX="499.0" layoutY="58.0" mnemonicParsing="false" onAction="#onDelete" prefHeight="25.0" prefWidth="64.0" text="消去" />
       <Separator layoutX="94.0" layoutY="3.0" orientation="VERTICAL" prefHeight="94.0" prefWidth="2.0" />
-      <Separator layoutX="336.0" layoutY="3.0" orientation="VERTICAL" prefHeight="94.0" prefWidth="2.0" />
+      <Separator layoutX="379.0" layoutY="3.0" orientation="VERTICAL" prefHeight="94.0" prefWidth="2.0" />
       <Button layoutX="578.0" layoutY="76.0" mnemonicParsing="false" onAction="#onOpenWindow" prefHeight="18.0" prefWidth="17.0" text="&gt;&gt;">
          <font>
             <Font size="6.0" />

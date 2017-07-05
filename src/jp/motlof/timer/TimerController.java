@@ -13,7 +13,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -30,6 +31,7 @@ public class TimerController implements Initializable{
 	public Label number;
 	
 	private Timer timer;
+	private double x,y;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -41,11 +43,13 @@ public class TimerController implements Initializable{
 		timer.cancel();
 		pauseButton.setDisable(true);
 		restartButton.setDisable(false);
+		Main.debugLog("Timer for "+timer.toString()+" Cancelled");
 	}
 
 	@FXML
 	public void onPause(ActionEvent e) {
 		pauseButton.setText(timer.togglePause()?"再開":"一時停止");
+		Main.debugLog("Pause " + timer.isPause());
 	}
 
 	@FXML
@@ -55,11 +59,25 @@ public class TimerController implements Initializable{
 		pauseButton.setText("一時停止");
 		timer = timer.restart();
 		timer.start();
+		Main.debugLog("Restart" + timer);
 	}
 
 	@FXML
 	public void onDelete(ActionEvent e) {
 		delete(true);
+		Main.debugLog("Timer "+number.getText()+" deleted");
+	}
+	
+	@FXML
+	public void onPress(MouseEvent e) {
+		x = ((Pane)e.getSource()).getLayoutX() - e.getSceneX();
+		y = ((Pane)e.getSource()).getLayoutY() - e.getSceneY();
+	}
+	
+	@FXML
+	public void onDragg(MouseEvent e) {
+		((Pane)e.getSource()).setLayoutX(e.getSceneX()+x);
+		((Pane)e.getSource()).setLayoutY(e.getSceneY()+y);
 	}
 	
 	@FXML
@@ -75,12 +93,15 @@ public class TimerController implements Initializable{
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+		Main.debugLog("Timer Window Scene loaded");
 		scene.setFill(Color.TRANSPARENT);
 		stage.setScene(scene);
 		stage.show();
 		OtherTimerController controller = loader.getController();
 		controller.start(timer, "<Title>");
+		Controller.timer2.add(controller);
 		delete(false);
+		Main.debugLog("Timer "+number.getText()+" Scene deleted");
 	}
 	
 	public void setnum(int num) {
@@ -104,7 +125,9 @@ public class TimerController implements Initializable{
 		int num = Integer.valueOf(number.getText());
 		if(cancel)
 			timer.cancel();
-		((VBox)timertext.getParent().getParent()).getChildren().remove(Controller.timer.indexOf(Controller.timer.get(num-1)));
+		Main.debugLog(Controller.timer.get(num-1).timertext.getText());
+		Main.debugLog(Controller.timer.indexOf(Controller.timer.get(num-1)));
+		((Pane)timertext.getParent().getParent()).getChildren().remove(Controller.timer.indexOf(Controller.timer.get(num-1)));
 		Controller.timer.remove(num-1);
 		Controller.updateNum();
 	}

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: #909090;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button layoutX="290.0" layoutY="461.0" mnemonicParsing="false" onAction="#onClose" text="閉じる" />
+      <Button layoutX="238.0" layoutY="461.0" mnemonicParsing="false" onAction="#onStart" text="開始" />
+      <Button layoutX="346.0" layoutY="461.0" mnemonicParsing="false" onAction="#onSave" text="保存" />
+      <TextField fx:id="filename" layoutX="5.0" layoutY="31.0" prefHeight="25.0" prefWidth="389.0" promptText="Profile name" />
+      <Pane layoutY="65.0" prefHeight="71.0" prefWidth="400.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <children>
+            <Separator layoutY="-1.0" prefHeight="0.0" prefWidth="400.0" />
+            <Label layoutX="14.0" layoutY="-8.0" style="-fx-background-color: #909090;" text="基本設定" />
+            <ComboBox fx:id="hour" editable="true" layoutX="12.0" layoutY="12.0" prefHeight="25.0" prefWidth="53.0" promptText="時" />
+            <ComboBox fx:id="minute" editable="true" layoutX="74.0" layoutY="12.0" prefHeight="25.0" prefWidth="53.0" promptText="分" />
+            <ComboBox fx:id="second" editable="true" layoutX="136.0" layoutY="12.0" prefHeight="25.0" prefWidth="53.0" promptText="秒" />
+            <CheckBox fx:id="adder" layoutX="200.0" layoutY="13.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="142.0" text="ストップウォッチ形式" textFill="WHITE">
+               <font>
+                  <Font name="Meiryo Bold" size="12.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="specified" layoutX="200.0" layoutY="42.0" mnemonicParsing="false" text="入力時間までのタイマー" textFill="WHITE">
+               <font>
+                  <Font name="Meiryo Bold" size="12.0" />
+               </font>
+            </CheckBox>
+         </children>
+      </Pane>
+      <MenuBar prefHeight="25.0" prefWidth="400.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="(　´∀｀)＜ぬるぽ">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+              </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+   </children>
+</AnchorPane>

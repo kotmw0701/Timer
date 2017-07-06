@@ -10,12 +10,12 @@
 
 <AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPress" onKeyReleased="#onKeyRelease" onMouseClicked="#onClick" onMouseDragged="#onDragg" onMouseEntered="#onEnter" onMouseExited="#onExit" onMousePressed="#onPress" prefHeight="400.0" prefWidth="800.0" style="-fx-background-color: rgba(200,200,200,0.5);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jp.motlof.timer.OtherTimerController">
    <children>
-      <Label fx:id="text" alignment="CENTER" layoutY="119.0" prefHeight="162.0" prefWidth="800.0" style=": ;" text="00:00:00.000" textFill="#323232" AnchorPane.bottomAnchor="119.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="119.0">
+      <Label fx:id="text" alignment="CENTER" layoutY="119.0" prefHeight="162.0" prefWidth="800.0" style="-fx-background-color: rgba(200,200,200,0.1);" text="00:00:00.000" textFill="#323232" AnchorPane.bottomAnchor="119.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="119.0">
          <font>
             <Font name="Meiryo Bold" size="100.0" />
          </font>
       </Label>
-      <Label fx:id="title" alignment="CENTER" layoutY="18.0" prefHeight="80.0" prefWidth="800.0" text="Timer num" textFill="#323232" AnchorPane.bottomAnchor="302.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="18.0">
+      <Label fx:id="title" alignment="CENTER" layoutY="23.0" prefHeight="80.0" prefWidth="800.0" text="Timer num" textFill="#323232" AnchorPane.bottomAnchor="297.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="23.0">
          <font>
             <Font size="40.0" />
          </font>
@@ -28,7 +28,9 @@
          </font>
       </Button>
       <Slider fx:id="slider" layoutX="684.0" layoutY="5.0" onMouseDragged="#onSliderDrag" onMouseEntered="#onSliderEnter" onMouseExited="#onSliderExit" prefHeight="18.0" prefWidth="85.0" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="5.0" />
+      <Slider fx:id="slider2" layoutX="684.0" layoutY="23.0" onMouseDragged="#onSliderDrag" onMouseEntered="#onSliderEnter" onMouseExited="#onSliderExit" prefHeight="14.0" prefWidth="85.0" />
       <Label fx:id="parcent" alignment="CENTER_RIGHT" layoutX="638.0" layoutY="5.0" prefHeight="18.0" prefWidth="38.0" text="0%" visible="false" AnchorPane.rightAnchor="124.0" AnchorPane.topAnchor="5.0" />
+      <Label fx:id="parcent2" alignment="CENTER_RIGHT" layoutX="638.0" layoutY="21.0" prefHeight="18.0" prefWidth="38.0" text="0%" visible="false" />
       <FlowPane alignment="CENTER" columnHalignment="CENTER" layoutY="280.0" prefHeight="120.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="280.0">
          <children>
             <Pane prefHeight="120.0" prefWidth="306.0" />

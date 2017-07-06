@@ -20,7 +20,6 @@ public class Main extends Application {
 	public static void main(String... args) {
 		if(args.length >= 1)
 			debugmode = Boolean.parseBoolean(args[0]);
-		debugmode = true;
 		debugLog("During startup...");
 		debugLog("Debugmode: "+debugmode);
 		launch(args);

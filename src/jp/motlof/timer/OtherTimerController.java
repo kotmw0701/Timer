@@ -32,13 +32,13 @@ public class OtherTimerController implements Initializable{
 	
 	@FXML Pane pane;
 	
-	@FXML Label title, text, parcent;
+	@FXML Label title, text, parcent, parcent2;
 	
 	@FXML ToggleButton pauseButton;
 	
 	@FXML Button startButton, stopButton, closeButton;
 	
-	@FXML Slider slider;
+	@FXML Slider slider, slider2;
 	
 	private Timer timer;
 	private ContextMenu context;
@@ -57,20 +57,7 @@ public class OtherTimerController implements Initializable{
 		item_bc.setOnAction(event -> {
 			
 		});
-		item_title.setOnAction(event -> {
-			Main.debugLog("Title Editmode enabled");
-			TextInputDialog dialog = new TextInputDialog();
-			dialog.setTitle("編集");
-			dialog.setHeaderText("変更後のタイトルを入力してください");
-			getControllerStage_Menu(event).setAlwaysOnTop(false);
-			Optional<String> result = dialog.showAndWait();
-			result.ifPresent(text -> {
-				title.setText(text);
-				Main.debugLog("Title Changed : "+text);
-				});
-			getControllerStage_Menu(event).setAlwaysOnTop(true);
-			Main.debugLog("Title Editmode disabled");
-		});
+		item_title.setOnAction(event -> titleEdit(event, false));
 		item_fullscreen.setOnAction(event -> {
 			Stage stage = getControllerStage_Menu(event);
 			stage.setFullScreenExitHint("");
@@ -101,7 +88,9 @@ public class OtherTimerController implements Initializable{
 		this.title.setText(title);
 		this.timer.setLabel(text);
 		this.slider.setValue(20);
-		this.parcent.setText("20%");
+		this.parcent.setText(slider.getValue()+"%");
+		this.slider2.setValue(10);
+		this.parcent2.setText(slider2.getValue()+"%");
 		if(!timer.isRunning()) startButton.setDisable(false);
 		if(timer.isPause()) {
 			pauseButton.setText("再開");
@@ -133,18 +122,22 @@ public class OtherTimerController implements Initializable{
 	public void onKeyPress(KeyEvent e) {
 		Main.debugLog("Pressed: "+e.getCode());
 		switch(e.getCode()) {
-		case ESCAPE:
-			close(e);
-			break;
 		case F1:
 			VisibleUI(!closeButton.isVisible());
 			break;
 		case F2:
-			//ラップ？
+			Stage stage = getControllerStage(e);
+			stage.setFullScreenExitHint("");
+			stage.setFullScreen(true);
+			Main.debugLog("Changed FullScreen");
 			break;
 		case F3:
+			if(getControllerStage(e).isFullScreen())
+				break;
+			titleEdit(e, true);
 			break;
 		case F4:
+			title.setVisible(!title.isVisible());
 			break;
 		case F5:
 			pause(false);
@@ -158,6 +151,9 @@ public class OtherTimerController implements Initializable{
 		case F8:
 			break;
 		case F9:
+			break;
+		case DELETE:
+			close(e);
 			break;
 		default:
 			break;
@@ -190,6 +186,21 @@ public class OtherTimerController implements Initializable{
 		if(!isbutton)
 			pauseButton.setSelected(!pauseButton.isSelected());
 		Main.debugLog("Pause "+(isbutton ? "" : "Shortcut ")+title.getText()+" "+timer.isPause());
+	}
+	
+	private void titleEdit(Event event, boolean isshortcut) {
+		Main.debugLog("Title Editmode enabled");
+		TextInputDialog dialog = new TextInputDialog();
+		dialog.setTitle("編集");
+		dialog.setHeaderText("変更後のタイトルを入力してください");
+		((Stage)(isshortcut ? getControllerStage(event) : getControllerStage_Menu(event))).setAlwaysOnTop(false);
+		Optional<String> result = dialog.showAndWait();
+		result.ifPresent(text -> {
+			title.setText(text);
+			Main.debugLog("Title Changed : "+text);
+			});
+		((Stage)(isshortcut ? getControllerStage(event) : getControllerStage_Menu(event))).setAlwaysOnTop(true);
+		Main.debugLog("Title Editmode disabled");
 	}
 	
 	@FXML
@@ -226,9 +237,15 @@ public class OtherTimerController implements Initializable{
 	
 	@FXML
 	public void onSliderDrag(MouseEvent e) {
-		pane.setStyle("-fx-background-color: rgba(200,200,200,"+(slider.getValue()/100)+")");
-		parcent.setText(((int)Math.floor(slider.getValue()))+"%");
-		Main.debugLog("Alpha changed "+title.getText()+" "+parcent.getText());
+		if(slider.isFocused()) {
+			pane.setStyle("-fx-background-color: rgba(200,200,200,"+((slider.getValue()/100)+(slider.getValue() < 1 ? 0.004 : 0.0))+")");
+			parcent.setText(((int)Math.floor(slider.getValue()))+"%");
+			Main.debugLog("Alpha changed "+title.getText()+" "+parcent.getText());
+		} else if(slider2.isFocused()) {
+			text.setStyle("-fx-background-color: rgba(200,200,200,"+(slider2.getValue()/100)+")");
+			parcent2.setText(((int)Math.floor(slider2.getValue()))+"%");
+			Main.debugLog("Alpha changed "+title.getText()+" "+parcent2.getText());
+		}
 	}
 	
 	@FXML
@@ -245,12 +262,16 @@ public class OtherTimerController implements Initializable{
 	
 	@FXML
 	public void onSliderEnter(MouseEvent e) {
-		parcent.setVisible(true);
+		if(slider.isHover())
+			parcent.setVisible(true);
+		else if(slider2.isHover())
+			parcent2.setVisible(true);
 	}
 	
 	@FXML
 	public void onSliderExit(MouseEvent e) {
 		parcent.setVisible(false);
+		parcent2.setVisible(false);
 	}
 	
 	private void close(Event e) {
@@ -266,6 +287,7 @@ public class OtherTimerController implements Initializable{
 		pauseButton.setVisible(visible);
 		closeButton.setVisible(visible);
 		slider.setOpacity((visible ? 1.0 : 0.0));
+		slider2.setVisible(visible);
 	}
 	
 	private Stage getControllerStage(Event e) {

@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.beans.property.ReadOnlyBooleanProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -93,12 +97,22 @@ public class TimerController implements Initializable{
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+		OtherTimerController controller = loader.getController();
+		ReadOnlyBooleanProperty fullScreenProperty = stage.fullScreenProperty();
+		fullScreenProperty.addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				controller.text.setPrefWidth(Screen.getPrimary().getBounds().getWidth());
+				stage.setAlwaysOnTop(!newValue);
+				Main.debugLog("FullScreen Toggle "+newValue);
+				Main.debugLog("AlwaysTop "+stage.isAlwaysOnTop());
+			}
+		});
 		Main.debugLog("Timer Window Scene loaded");
 		scene.setFill(Color.TRANSPARENT);
 		stage.setScene(scene);
+		controller.start(timer);
 		stage.show();
-		OtherTimerController controller = loader.getController();
-		controller.start(timer, "<Title>");
 		Controller.timer2.add(controller);
 		delete(false);
 		Main.debugLog("Timer "+number.getText()+" Scene deleted");

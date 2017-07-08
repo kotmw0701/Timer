@@ -17,7 +17,10 @@
             <Font name="Meiryo Bold" size="12.0" />
          </font>
       </Label>
-      <Button layoutX="401.0" layoutY="556.0" mnemonicParsing="false" onAction="#onHideButton" prefHeight="6.0" prefWidth="71.0" text="表示を消す" />
+      <Button layoutX="357.0" layoutY="556.0" mnemonicParsing="false" onAction="#onHideButton" prefHeight="29.0" prefWidth="115.0" text="表示を消す">
+         <font>
+            <Font name="Meiryo" size="12.0" />
+         </font></Button>
       <ToolBar prefHeight="13.0" prefWidth="600.0" style="-fx-background-color: #505050;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <items>
             <Button mnemonicParsing="false" onAction="#onStart" prefHeight="0.0" prefWidth="72.0" text="開始/追加">

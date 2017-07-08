@@ -13,8 +13,11 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
@@ -25,8 +28,14 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class OtherTimerController implements Initializable{
 	
@@ -46,8 +55,6 @@ public class OtherTimerController implements Initializable{
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		this.slider.setValue(50);
-		this.parcent.setText("50%");
 		context = new ContextMenu();
 		List<MenuItem> items = new ArrayList<>();
 		MenuItem item_bc = new MenuItem("背景色変更"), 
@@ -55,6 +62,23 @@ public class OtherTimerController implements Initializable{
 				item_fullscreen = new MenuItem("全画面にする"),
 				item_google = new MenuItem("Googleを開く");
 		item_bc.setOnAction(event -> {
+			Stage stage = new Stage();
+			FXMLLoader loader = new FXMLLoader(ClassLoader.getSystemResource("ColorSliders.fxml"));
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.initOwner(getControllerStage_Menu(event));
+			stage.initStyle(StageStyle.TRANSPARENT);
+			stage.setResizable(false);
+			Scene scene = null;
+			try {
+				scene = new Scene(loader.load());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			ColorSliderController controller = loader.getController();
+			controller.initOwnerData(pane, text);
+			scene.setFill(Color.TRANSPARENT);
+			stage.setScene(scene);
+			stage.show();
 			
 		});
 		item_title.setOnAction(event -> titleEdit(event, false));
@@ -82,10 +106,10 @@ public class OtherTimerController implements Initializable{
 		context.getItems().addAll(items);
 	}
 	
-	public void start(Timer timer, String title) {
+	public void start(Timer timer) {
 		this.timer = timer;
 		Main.debugLog("Timer set "+timer);
-		this.title.setText(title);
+		this.title.setText("Empty Title");
 		this.timer.setLabel(text);
 		this.slider.setValue(20);
 		this.parcent.setText(slider.getValue()+"%");
@@ -236,13 +260,14 @@ public class OtherTimerController implements Initializable{
 	}
 	
 	@FXML
-	public void onSliderDrag(MouseEvent e) {
+	public void onSliderDragg(MouseEvent e) {
+		Color color = ((Color)pane.getBackground().getFills().get(0).getFill());
 		if(slider.isFocused()) {
-			pane.setStyle("-fx-background-color: rgba(200,200,200,"+((slider.getValue()/100)+(slider.getValue() < 1 ? 0.004 : 0.0))+")");
+			pane.setBackground(new Background(new BackgroundFill(new Color(color.getRed(), color.getGreen(), color.getBlue(), (slider.getValue()/100)+(slider.getValue() < 1 ? 0.004 : 0.0)), CornerRadii.EMPTY, Insets.EMPTY)));
 			parcent.setText(((int)Math.floor(slider.getValue()))+"%");
 			Main.debugLog("Alpha changed "+title.getText()+" "+parcent.getText());
 		} else if(slider2.isFocused()) {
-			text.setStyle("-fx-background-color: rgba(200,200,200,"+(slider2.getValue()/100)+")");
+			text.setBackground(new Background(new BackgroundFill(new Color(color.getRed(), color.getGreen(), color.getBlue(), (slider2.getValue()/100)+(slider2.getValue() < 1 ? 0.004 : 0.0)), CornerRadii.EMPTY, Insets.EMPTY)));
 			parcent2.setText(((int)Math.floor(slider2.getValue()))+"%");
 			Main.debugLog("Alpha changed "+title.getText()+" "+parcent2.getText());
 		}

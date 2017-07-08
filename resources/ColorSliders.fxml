@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane onMouseDragged="#onDragg" onMousePressed="#onPress" prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: rgba(255,255,255,0.8);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jp.motlof.timer.ColorSliderController">
+   <children>
+      <Separator layoutX="250.0" orientation="VERTICAL" prefHeight="203.0" prefWidth="6.0" />
+      <Pane prefHeight="203.0" prefWidth="250.0">
+         <children>
+            <Label layoutX="60.0" text="BackGround">
+               <font>
+                  <Font name="Meiryo Bold" size="20.0" />
+               </font>
+            </Label>
+            <Slider fx:id="bgr" layoutX="55.0" layoutY="45.0" onMouseDragged="#onSliderDragg" onMousePressed="#onSliderDragg" showTickMarks="true" />
+            <Slider fx:id="bgg" layoutX="55.0" layoutY="80.0" onMouseDragged="#onSliderDragg" onMousePressed="#onSliderDragg" showTickMarks="true" />
+            <Slider fx:id="bgb" layoutX="55.0" layoutY="115.0" onMouseDragged="#onSliderDragg" onMousePressed="#onSliderDragg" showTickMarks="true" />
+            <Label layoutX="8.0" layoutY="111.0" text="Blue">
+               <font>
+                  <Font name="Meiryo" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="8.0" layoutY="40.0" text="Red">
+               <font>
+                  <Font name="Meiryo" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="8.0" layoutY="75.0" text="Green">
+               <font>
+                  <Font name="Meiryo" size="14.0" />
+               </font>
+            </Label>
+            <Pane fx:id="previewpane" layoutY="142.0" prefHeight="61.0" prefWidth="250.0">
+               <children>
+                  <Label fx:id="previewtext" layoutX="90.0" layoutY="14.0" text="Before">
+                     <font>
+                        <Font name="Meiryo Bold" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children></Pane>
+      <Pane layoutX="253.0" prefHeight="203.0" prefWidth="250.0">
+         <children>
+            <Label layoutX="102.0" text="Text">
+               <font>
+                  <Font name="Meiryo Bold" size="20.0" />
+               </font>
+            </Label>
+            <Pane fx:id="previewpane2" layoutY="142.0" prefHeight="61.0" prefWidth="250.0">
+               <children>
+                  <Label fx:id="previewtext2" layoutX="99.0" layoutY="14.0" text="After">
+                     <font>
+                        <Font name="Meiryo Bold" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Label layoutX="8.0" layoutY="76.0" text="Green">
+               <font>
+                  <Font name="Meiryo" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="8.0" layoutY="41.0" text="Red">
+               <font>
+                  <Font name="Meiryo" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="8.0" layoutY="111.0" text="Blue">
+               <font>
+                  <Font name="Meiryo" size="14.0" />
+               </font>
+            </Label>
+            <Slider fx:id="txr" layoutX="55.0" layoutY="46.0" onMouseDragged="#onSliderDragg" onMousePressed="#onSliderDragg" showTickMarks="true" />
+            <Slider fx:id="txg" layoutX="55.0" layoutY="81.0" onMouseDragged="#onSliderDragg" onMousePressed="#onSliderDragg" showTickMarks="true" />
+            <Slider fx:id="txb" layoutX="55.0" layoutY="116.0" onMouseDragged="#onSliderDragg" onMousePressed="#onSliderDragg" showTickMarks="true" />
+         </children>
+      </Pane>
+      <Button layoutX="480.0" layoutY="2.0" mnemonicParsing="false" onAction="#onClose" prefHeight="21.0" prefWidth="18.0" text="×" textFill="RED">
+         <font>
+            <Font name="Meiryo Bold" size="9.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

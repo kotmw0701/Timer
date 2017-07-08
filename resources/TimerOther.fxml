@@ -10,28 +10,23 @@
 
 <AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPress" onKeyReleased="#onKeyRelease" onMouseClicked="#onClick" onMouseDragged="#onDragg" onMouseEntered="#onEnter" onMouseExited="#onExit" onMousePressed="#onPress" prefHeight="400.0" prefWidth="800.0" style="-fx-background-color: rgba(200,200,200,0.5);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jp.motlof.timer.OtherTimerController">
    <children>
-      <Label fx:id="text" alignment="CENTER" layoutY="119.0" prefHeight="162.0" prefWidth="800.0" style="-fx-background-color: rgba(200,200,200,0.1);" text="00:00:00.000" textFill="#323232" AnchorPane.bottomAnchor="119.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="119.0">
+      <Label fx:id="title" alignment="CENTER" layoutY="27.0" prefHeight="76.0" prefWidth="800.0" text="Timer num" textFill="#323232" AnchorPane.bottomAnchor="297.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0">
          <font>
-            <Font name="Meiryo Bold" size="100.0" />
+            <Font name="Meiryo" size="40.0" />
          </font>
       </Label>
-      <Label fx:id="title" alignment="CENTER" layoutY="23.0" prefHeight="80.0" prefWidth="800.0" text="Timer num" textFill="#323232" AnchorPane.bottomAnchor="297.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="23.0">
-         <font>
-            <Font size="40.0" />
-         </font>
-      </Label>
-      <Separator layoutY="280.0" prefHeight="0.0" prefWidth="800.0" AnchorPane.bottomAnchor="279.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="118.0" />
-      <Separator layoutY="280.0" prefHeight="3.0" prefWidth="800.0" AnchorPane.bottomAnchor="117.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="280.0" />
+      <Separator layoutY="115.0" prefHeight="0.0" prefWidth="800.0" AnchorPane.bottomAnchor="282.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="115.0" />
+      <Separator layoutY="279.0" prefHeight="3.0" prefWidth="800.0" AnchorPane.bottomAnchor="118.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="279.0" />
       <Button fx:id="closeButton" layoutX="778.0" layoutY="2.0" mnemonicParsing="false" onAction="#onClose" prefHeight="21.0" prefWidth="18.0" text="×" textFill="RED" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0">
          <font>
             <Font name="Meiryo Bold" size="9.0" />
          </font>
       </Button>
-      <Slider fx:id="slider" layoutX="684.0" layoutY="5.0" onMouseDragged="#onSliderDrag" onMouseEntered="#onSliderEnter" onMouseExited="#onSliderExit" prefHeight="18.0" prefWidth="85.0" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="5.0" />
-      <Slider fx:id="slider2" layoutX="684.0" layoutY="23.0" onMouseDragged="#onSliderDrag" onMouseEntered="#onSliderEnter" onMouseExited="#onSliderExit" prefHeight="14.0" prefWidth="85.0" />
+      <Slider fx:id="slider" layoutX="684.0" layoutY="5.0" onMouseDragged="#onSliderDragg" onMouseEntered="#onSliderEnter" onMouseExited="#onSliderExit" onMousePressed="#onSliderDragg" prefHeight="18.0" prefWidth="85.0" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="5.0" />
+      <Slider fx:id="slider2" layoutX="684.0" layoutY="23.0" onMouseDragged="#onSliderDragg" onMouseEntered="#onSliderEnter" onMouseExited="#onSliderExit" onMousePressed="#onSliderDragg" prefHeight="14.0" prefWidth="85.0" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="23.0" />
       <Label fx:id="parcent" alignment="CENTER_RIGHT" layoutX="638.0" layoutY="5.0" prefHeight="18.0" prefWidth="38.0" text="0%" visible="false" AnchorPane.rightAnchor="124.0" AnchorPane.topAnchor="5.0" />
-      <Label fx:id="parcent2" alignment="CENTER_RIGHT" layoutX="638.0" layoutY="21.0" prefHeight="18.0" prefWidth="38.0" text="0%" visible="false" />
-      <FlowPane alignment="CENTER" columnHalignment="CENTER" layoutY="280.0" prefHeight="120.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="280.0">
+      <Label fx:id="parcent2" alignment="CENTER_RIGHT" layoutX="638.0" layoutY="21.0" prefHeight="18.0" prefWidth="38.0" text="0%" visible="false" AnchorPane.rightAnchor="124.0" AnchorPane.topAnchor="21.0" />
+      <FlowPane alignment="CENTER" columnHalignment="CENTER" layoutY="279.0" prefHeight="116.0" prefWidth="800.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="279.0">
          <children>
             <Pane prefHeight="120.0" prefWidth="306.0" />
             <Pane prefHeight="120.0" prefWidth="182.0">
@@ -54,6 +49,15 @@
                </children>
             </Pane>
             <Pane prefHeight="120.0" prefWidth="312.0" />
+         </children>
+      </FlowPane>
+      <FlowPane alignment="CENTER" layoutY="117.0" prefHeight="162.0" prefWidth="800.0" AnchorPane.bottomAnchor="121.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="117.0">
+         <children>
+            <Label fx:id="text" alignment="CENTER" prefHeight="161.0" prefWidth="800.0" style="-fx-background-color: rgba(200,200,200,0.1);" text="00:00:00.000" textFill="#323232">
+               <font>
+                  <Font name="Meiryo Bold" size="100.0" />
+               </font>
+            </Label>
          </children>
       </FlowPane>
    </children>

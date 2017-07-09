@@ -62,28 +62,11 @@ public class OtherTimerController implements Initializable{
 				item_fullscreen = new MenuItem("全画面にする"),
 				item_google = new MenuItem("Googleを開く");
 		item_bc.setOnAction(event -> {
-			Stage stage = new Stage();
-			FXMLLoader loader = new FXMLLoader(ClassLoader.getSystemResource("ColorSliders.fxml"));
-			stage.initModality(Modality.APPLICATION_MODAL);
-			stage.initOwner(getControllerStage_Menu(event));
-			stage.initStyle(StageStyle.TRANSPARENT);
-			stage.setResizable(false);
-			Scene scene = null;
-			try {
-				scene = new Scene(loader.load());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			ColorSliderController controller = loader.getController();
-			controller.initOwnerData(pane, text);
-			scene.setFill(Color.TRANSPARENT);
-			stage.setScene(scene);
-			stage.show();
-			
+			colorEdit(event, false);
 		});
 		item_title.setOnAction(event -> titleEdit(event, false));
 		item_fullscreen.setOnAction(event -> {
-			Stage stage = getControllerStage_Menu(event);
+			Stage stage = getControllerStage(event, false);
 			stage.setFullScreenExitHint("");
 			stage.setFullScreen(true);
 			Main.debugLog("Changed FullScreen");
@@ -150,18 +133,15 @@ public class OtherTimerController implements Initializable{
 			VisibleUI(!closeButton.isVisible());
 			break;
 		case F2:
+			title.setVisible(!title.isVisible());
+			break;
+		case F3:
 			Stage stage = getControllerStage(e);
 			stage.setFullScreenExitHint("");
 			stage.setFullScreen(true);
 			Main.debugLog("Changed FullScreen");
 			break;
-		case F3:
-			if(getControllerStage(e).isFullScreen())
-				break;
-			titleEdit(e, true);
-			break;
 		case F4:
-			title.setVisible(!title.isVisible());
 			break;
 		case F5:
 			pause(false);
@@ -175,6 +155,12 @@ public class OtherTimerController implements Initializable{
 		case F8:
 			break;
 		case F9:
+			if(getControllerStage(e).isFullScreen())
+				break;
+			titleEdit(e, true);
+			break;
+		case F10:
+			colorEdit(e, true);
 			break;
 		case DELETE:
 			close(e);
@@ -217,14 +203,34 @@ public class OtherTimerController implements Initializable{
 		TextInputDialog dialog = new TextInputDialog();
 		dialog.setTitle("編集");
 		dialog.setHeaderText("変更後のタイトルを入力してください");
-		((Stage)(isshortcut ? getControllerStage(event) : getControllerStage_Menu(event))).setAlwaysOnTop(false);
+		getControllerStage(event, !isshortcut).setAlwaysOnTop(false);
 		Optional<String> result = dialog.showAndWait();
 		result.ifPresent(text -> {
 			title.setText(text);
 			Main.debugLog("Title Changed : "+text);
 			});
-		((Stage)(isshortcut ? getControllerStage(event) : getControllerStage_Menu(event))).setAlwaysOnTop(true);
+		getControllerStage(event, !isshortcut).setAlwaysOnTop(true);
 		Main.debugLog("Title Editmode disabled");
+	}
+	
+	private void colorEdit(Event event, boolean isshortcut) {
+		Stage stage = new Stage();
+		FXMLLoader loader = new FXMLLoader(ClassLoader.getSystemResource("ColorSliders.fxml"));
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.initOwner(getControllerStage(event, !isshortcut));
+		stage.initStyle(StageStyle.TRANSPARENT);
+		stage.setResizable(false);
+		Scene scene = null;
+		try {
+			scene = new Scene(loader.load());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		ColorSliderController controller = loader.getController();
+		controller.initOwnerData(pane, text);
+		scene.setFill(Color.TRANSPARENT);
+		stage.setScene(scene);
+		stage.show();
 	}
 	
 	@FXML
@@ -316,10 +322,12 @@ public class OtherTimerController implements Initializable{
 	}
 	
 	private Stage getControllerStage(Event e) {
-		return ((Stage)((Node)e.getSource()).getScene().getWindow());
+		return getControllerStage(e, false);
 	}
 	
-	public Stage getControllerStage_Menu(Event e) {
-		return ((Stage)((MenuItem)e.getSource()).getParentPopup().getOwnerWindow());
+	private Stage getControllerStage(Event e, boolean ismenu) {
+		if(ismenu)
+			return ((Stage)((MenuItem)e.getSource()).getParentPopup().getOwnerWindow());
+		return ((Stage)((Node)e.getSource()).getScene().getWindow());
 	}
 }

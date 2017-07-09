@@ -16,6 +16,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 
 public class Controller implements Initializable {
@@ -30,6 +32,7 @@ public class Controller implements Initializable {
 	
 	public static List<TimerController> timer = new ArrayList<>();
 	public static List<OtherTimerController> timer2 = new ArrayList<>();
+	private boolean ctrl = false;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -51,6 +54,36 @@ public class Controller implements Initializable {
 		if(!checkLimit())
 			return;
 		Main.debugLog("LimitCheck... OK");
+		createTimer(getNum(second), getNum(minute), getNum(hour), adder.isSelected());
+	}
+	
+	@FXML
+	public void onHideButton(ActionEvent e) {
+		howto.setVisible(false);
+		((Node)e.getSource()).setVisible(false);
+		Main.debugLog("\"How to\" Hide");
+	}
+	
+
+	@FXML
+	public void onKeyPress(KeyEvent e) {
+		Main.debugLog("Pressed: "+e.getCode()+ " Name: "+e.getCode().getName() + " toString: "+e.getCode().toString());
+		if(e.getCode() == KeyCode.CONTROL) ctrl = true;
+		if(!e.getCode().toString().startsWith("DIGIT") || !ctrl)
+			return;
+		int minute = 0;
+		minute = Integer.parseInt(e.getCode().toString().substring(5));
+		Main.debugLog("Minute: "+minute);
+		createTimer(0, minute, 0, false);
+	}
+	
+	@FXML
+	public void onKeyRelease(KeyEvent e) {
+		Main.debugLog("Released: "+e.getCode());
+		if(e.getCode() == KeyCode.CONTROL) ctrl = false;
+	}
+	
+	private void createTimer(int second, int minute, int hour, boolean adder) {
 		Pane newtimer = null;
 		FXMLLoader loader = new FXMLLoader(ClassLoader.getSystemResource("Timer.fxml"));
 		try {
@@ -64,15 +97,8 @@ public class Controller implements Initializable {
 		TimerController controller = loader.getController();
 		controller.setnum(timer.size()+1);
 		Main.debugLog("Timer Number: " +(timer.size()+1));
-		controller.startTimer(getNum(second), getNum(minute), getNum(hour), adder.isSelected());
+		controller.startTimer(second, minute, hour, adder);
 		timer.add(controller);
-	}
-	
-	@FXML
-	public void onHideButton(ActionEvent e) {
-		howto.setVisible(false);
-		((Node)e.getSource()).setVisible(false);
-		Main.debugLog("\"How to\" Hide");
 	}
 	
 	private int getNum(ComboBox<Integer> box) {

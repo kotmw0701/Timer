@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" style="-fx-background-color: #202020;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jp.motlof.timer.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPress" onKeyReleased="#onKeyRelease" prefHeight="800.0" prefWidth="600.0" style="-fx-background-color: #202020;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jp.motlof.timer.Controller">
    <children>
       <Pane fx:id="timerBox" layoutX="1.0" layoutY="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="764.0" prefWidth="600.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="35.0" />
       <Label fx:id="howto" layoutX="129.0" layoutY="362.0" prefHeight="194.0" prefWidth="343.0" text="How to use&#10;&#10;自分が使いたい時間を[時] [分] [秒]に入れる&#10;↓&#10;秒が増えていくようにしたい場合は[加算型]に✓を入れる&#10;↓&#10;[開始/追加]を押すとタイマーが開始&#10;&#10;複数作ることもできます。" textFill="#979797">

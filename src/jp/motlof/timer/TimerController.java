@@ -26,7 +26,7 @@ import javafx.stage.StageStyle;
 public class TimerController implements Initializable{
 
 	@FXML
-	public Label timertext;
+	public Label timertext, period;
 	
 	@FXML
 	public Button pauseButton, restartButton;

@@ -37,12 +37,12 @@ public class ColorSliderController{
 		previewtext.setTextFill(ownerlabel.getTextFill());
 		previewpane2.setBackground(new Background(new BackgroundFill(new Color(color.getRed(), color.getGreen(), color.getBlue(), 1), CornerRadii.EMPTY, Insets.EMPTY)));
 		previewtext2.setTextFill(ownerlabel.getTextFill());
-		bgr.setValue((color.getRed()*100));
-		bgg.setValue((color.getGreen()*100));
-		bgb.setValue((color.getBlue()*100));
-		txr.setValue((color2.getRed()*100));
-		txg.setValue((color2.getGreen()*100));
-		txb.setValue((color2.getBlue()*100));
+		bgr.setValue(color.getRed()*100);
+		bgg.setValue(color.getGreen()*100);
+		bgb.setValue(color.getBlue()*100);
+		txr.setValue(color2.getRed()*100);
+		txg.setValue(color2.getGreen()*100);
+		txb.setValue(color2.getBlue()*100);
 	}
 	
 	@FXML
@@ -68,9 +68,9 @@ public class ColorSliderController{
 	
 	@FXML
 	public void onSliderDragg(MouseEvent e) {
-		previewpane2.setBackground(new Background(new BackgroundFill(new Color((bgr.getValue()/100), (bgg.getValue()/100), (bgb.getValue()/100), 0.8), CornerRadii.EMPTY, Insets.EMPTY)));
-		previewtext2.setTextFill(new Color((txr.getValue()/100), (txg.getValue()/100), (txb.getValue()/100), 0.8));
 		Color color = ((Color)ownerpane.getBackground().getFills().get(0).getFill()), color2 = ((Color)ownerlabel.getBackground().getFills().get(0).getFill());
+		previewpane2.setBackground(new Background(new BackgroundFill(new Color((bgr.getValue()/100), (bgg.getValue()/100), (bgb.getValue()/100), color.getOpacity()), CornerRadii.EMPTY, Insets.EMPTY)));
+		previewtext2.setTextFill(new Color((txr.getValue()/100), (txg.getValue()/100), (txb.getValue()/100), 1));
 		ownerpane.setBackground(new Background(new BackgroundFill(new Color((bgr.getValue()/100), (bgg.getValue()/100), (bgb.getValue()/100), color.getOpacity()), CornerRadii.EMPTY, Insets.EMPTY)));
 		ownerlabel.setBackground(new Background(new BackgroundFill(new Color((bgr.getValue()/100), (bgg.getValue()/100), (bgb.getValue()/100), color2.getOpacity()), CornerRadii.EMPTY, Insets.EMPTY)));
 		ownerlabel.setTextFill(new Color((txr.getValue()/100), (txg.getValue()/100), (txb.getValue()/100), 1));
